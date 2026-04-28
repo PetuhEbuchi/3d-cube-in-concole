@@ -1,25 +1,11 @@
 from os import system as sys
+from time import sleep 
 # import math
 
 
 
 
 #расчет кординат для круга 
-cords = []
-for y in range(-26, 26):
-    for x in range(-26, 26):
-        cordinate = []
-        if 25**2 >= (x**2) + ((y*2)**2) and 25**2 <= (x**2) + 50 + ((y*2)**2) + 50: # +50
-            print("#", end = "") # отрисовка для дебага
-            cordinate.append(x)
-            cordinate.append(y)
-            cords.append(cordinate)
-        else: 
-            pass
-            print(" ", end = "") # отрисовка для дебага
-    print("")
-input()
-    
 
 
 
@@ -28,7 +14,25 @@ input()
 
 
 
-def circle_sort(cords): 
+def circle_sort(): 
+
+    cords = []
+    for y in range(-26, 26):
+        for x in range(-26, 26):
+            cordinate = []
+            if 25**2 >= (x**2) + ((y*2)**2) and 25**2 <= (x**2) + 50 + ((y*2)**2) + 50: # +50
+                # print("#", end = "") # отрисовка для дебага
+                cordinate.append(x)
+                cordinate.append(y)
+                cords.append(cordinate)
+            else: 
+                pass
+                # print(" ", end = "") # отрисовка для дебага
+        print("")
+    # input()
+    
+
+
 
 
     # for y in range(-26, 26):
@@ -54,6 +58,10 @@ def circle_sort(cords):
         elif x < 0 and y < 0:
             sektor = 4
         return (sektor)
+
+
+
+
 
 
     # списки для сектров
@@ -151,35 +159,65 @@ def circle_sort(cords):
 
 
 
-sorted_cords = circle_sort(cords)
+sorted_cords = circle_sort()
+
+from os import system as sys
+from time import sleep
+
+# ... функция circle_sort() остаётся без изменений ...
+
+sorted_cords = circle_sort()
+
+# все списки line1list...line4list и block генерации line_cords удалены
 
 
-
-
-
-
-# отрисовка
 def render():
     sys("mode con: cols=200 lines=26")
-    for i in sorted_cords:
-        for y in range(-13, 13):
-            for x in range(-25, 26):
-                if i[0] == x and i[1] == y:
-                    print("#", end = "")
-                else:
-                    print(" ", end = "")
-            print("")
-        input("")
+    sys("cls")
+    while True:
+        for i in range(len(sorted_cords)):
+            # четыре вершины квадрата для текущего i
+            n = len(sorted_cords)
+            x1cord = sorted_cords[i]
+            x2cord = sorted_cords[(i - n // 4) % n]
+            x3cord = sorted_cords[(i - n // 2) % n]
+            x4cord = sorted_cords[(i - (3 * n) // 4) % n]
 
-        
+            # список всех точек рёбер (линий) текущего квадрата
+            line_points = []
+
+            # вспомогательная функция: все целые точки отрезка между a и b
+            def line_between(a, b):
+                points = []
+                x1, y1 = a
+                x2, y2 = b
+                dx = x2 - x1
+                dy = y2 - y1
+                steps = max(abs(dx), abs(dy))
+                if steps == 0:
+                    return [a]
+                for s in range(steps + 1):
+                    t = s / steps
+                    x = round(x1 + t * dx)
+                    y = round(y1 + t * dy)
+                    points.append([x, y])
+                return points
+
+            # добавляем рёбра квадрата
+            line_points += line_between(x1cord, x2cord)
+            line_points += line_between(x2cord, x3cord)
+            line_points += line_between(x3cord, x4cord)
+            line_points += line_between(x4cord, x1cord)
+
+            # отрисовка
+            for y in range(-13, 13):
+                for x in range(-25, 26):
+                    if [x, y] in ([x1cord, x2cord, x3cord, x4cord] + line_points ):
+                        print("#", end="")
+                    else:
+                        print(" ", end="")
+                print("")
+            sleep(0.05)
 
 
-
-
-
-
-
-
-while True:
-    render()
-
+render()
