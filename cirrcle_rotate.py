@@ -19,12 +19,16 @@ def circle_sort():
     cords = []
     for y in range(-26, 26):
         for x in range(-26, 26):
+
             cordinate = []
             if 25**2 >= (x**2) + ((y*2)**2) and 25**2 <= (x**2) + 50 + ((y*2)**2) + 50: # +50
+
                 # print("#", end = "") # отрисовка для дебага
+
                 cordinate.append(x)
                 cordinate.append(y)
                 cords.append(cordinate)
+
             else: 
                 pass
                 # print(" ", end = "") # отрисовка для дебага
@@ -164,60 +168,132 @@ sorted_cords = circle_sort()
 from os import system as sys
 from time import sleep
 
-# ... функция circle_sort() остаётся без изменений ...
+
 
 sorted_cords = circle_sort()
 
-# все списки line1list...line4list и block генерации line_cords удалены
+
+
+def zrotate(i):
+
+    n = len(sorted_cords)
+    z1cord = sorted_cords[i][0]
+    z2cord = sorted_cords[i - n // 4][0] #- n // 4
+    z3cord = sorted_cords[i - n // 4 * 3][0]
+    z4cord = sorted_cords[i - n // 4 * 2][0]
+    zallcords = [z1cord, z2cord, z3cord, z4cord]
+
+
+    return(zallcords)
+
+
+
+def yrotate(i):
+
+    n = len(sorted_cords)
+    y1cord = sorted_cords[i][1]
+    y2cord = sorted_cords[i - n // 4][1] #- n // 4
+    y3cord = sorted_cords[i - n // 4 * 3][1]
+    y4cord = sorted_cords[i - n // 4 * 2][1]
+    yallcords = [y1cord, y2cord, y3cord, y4cord]
+
+
+    return(yallcords)
+
+
+
+
+# def zrotate(i):
+
+#     n = len(sorted_cords)
+#     x1cord = sorted_cords[i][0]
+#     x2cord = sorted_cords[i - n // 4][0] #- n // 4
+#     x3cord = sorted_cords[i - n // 4 * 3][0]
+#     x4cord = sorted_cords[i - n // 4 * 2][0]
+#     xallcords = [x1cord, x2cord, x3cord, x4cord]
+
+
+#     return(xallcords)
+
+
+
+
+def cordcalc(i, wha):
+    
+    zcrd = zrotate(i)
+    ycrd = yrotate(i)
+
+    
+    sum_cords1 = []
+    sum_cords2 = []
+    sum_cords3 = []
+    sum_cords4 = []
+
+
+
+
+
+    sum_cords1.append(zcrd[0])
+    sum_cords1.append(ycrd[0])
+
+    sum_cords2.append(zcrd[1])
+    sum_cords2.append(ycrd[1])
+
+    sum_cords3.append(zcrd[2])
+    sum_cords3.append(ycrd[2])
+
+    sum_cords4.append(zcrd[3])
+    sum_cords4.append(ycrd[3])
+
+    sum_cords_all = [sum_cords1, sum_cords2, sum_cords3, sum_cords4]
+
+    return sum_cords_all
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def render():
-    sys("mode con: cols=200 lines=26")
-    sys("cls")
-    while True:
-        for i in range(len(sorted_cords)):
-            # четыре вершины квадрата для текущего i
-            n = len(sorted_cords)
-            x1cord = sorted_cords[i]
-            x2cord = sorted_cords[(i - n // 4) % n]
-            x3cord = sorted_cords[(i - n // 2) % n]
-            x4cord = sorted_cords[(i - (3 * n) // 4) % n]
+    sys("mode con: cols=100 lines=26")
+    
+    for i in range(len(sorted_cords)):
+        cordsss = cordcalc(i, all)
 
-            # список всех точек рёбер (линий) текущего квадрата
-            line_points = []
+        for y in range(-13, 13):
+            for x in range(-26, 26):
 
-            # вспомогательная функция: все целые точки отрезка между a и b
-            def line_between(a, b):
-                points = []
-                x1, y1 = a
-                x2, y2 = b
-                dx = x2 - x1
-                dy = y2 - y1
-                steps = max(abs(dx), abs(dy))
-                if steps == 0:
-                    return [a]
-                for s in range(steps + 1):
-                    t = s / steps
-                    x = round(x1 + t * dx)
-                    y = round(y1 + t * dy)
-                    points.append([x, y])
-                return points
-
-            # добавляем рёбра квадрата
-            line_points += line_between(x1cord, x2cord)
-            line_points += line_between(x2cord, x3cord)
-            line_points += line_between(x3cord, x4cord)
-            line_points += line_between(x4cord, x1cord)
-
-            # отрисовка
-            for y in range(-13, 13):
-                for x in range(-25, 26):
-                    if [x, y] in ([x1cord, x2cord, x3cord, x4cord] + line_points ):
-                        print("#", end="")
-                    else:
-                        print(" ", end="")
-                print("")
-            sleep(0.05)
-
+                if  [x, y] in cordsss:
+                    print("#", end = "")
+                else:
+                    print(" ", end = "")
+            print()
+        what = input("x y z: ")
+        if what == "z":
+            cordcalc(i, "z")
 
 render()
+
