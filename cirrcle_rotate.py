@@ -19,20 +19,16 @@ def circle_sort():
     cords = []
     for y in range(-26, 26):
         for x in range(-26, 26):
-
             cordinate = []
             if 25**2 >= (x**2) + ((y*2)**2) and 25**2 <= (x**2) + 50 + ((y*2)**2) + 50: # +50
-
                 # print("#", end = "") # отрисовка для дебага
-
                 cordinate.append(x)
                 cordinate.append(y)
                 cords.append(cordinate)
-
             else: 
                 pass
                 # print(" ", end = "") # отрисовка для дебага
-        print("")
+        # print("")
     # input()
     
 
@@ -47,6 +43,7 @@ def circle_sort():
 
     #         else: print(" ", end = "")
     #     print("") # отрисовка для дебага
+    # input()
 
 
 
@@ -165,108 +162,103 @@ def circle_sort():
 
 sorted_cords = circle_sort()
 
-from os import system as sys
-from time import sleep
+n = len(sorted_cords)
 
 
+def zspin(i):
 
-sorted_cords = circle_sort()
+    zcrd1 = sorted_cords[i][0]
+    zcrd2 = sorted_cords[i][0]
 
+    zcrd3 = sorted_cords[i- n // 4][0]
+    zcrd4 = sorted_cords[i- n // 4][0] 
 
+    zcrd5 = sorted_cords[i- n // 4 * 3][0] 
+    zcrd6 = sorted_cords[i- n // 4 * 3][0] 
 
-def zrotate(i):
+    zcrd7 = sorted_cords[i- n // 4 * 2][0] 
+    zcrd8 = sorted_cords[i- n // 4 * 2][0] 
 
-    n = len(sorted_cords)
-    z1cord = sorted_cords[i][0]
-    z2cord = sorted_cords[i - n // 4][0] #- n // 4
-    z3cord = sorted_cords[i - n // 4 * 3][0]
-    z4cord = sorted_cords[i - n // 4 * 2][0]
-    zallcords = [z1cord, z2cord, z3cord, z4cord]
-
-
-    return(zallcords)
-
-
-
-def yrotate(i):
-
-    n = len(sorted_cords)
-    y1cord = sorted_cords[i][1]
-    y2cord = sorted_cords[i - n // 4][1] #- n // 4
-    y3cord = sorted_cords[i - n // 4 * 3][1]
-    y4cord = sorted_cords[i - n // 4 * 2][1]
-    yallcords = [y1cord, y2cord, y3cord, y4cord]
-
-
-    return(yallcords)
-
-
-
-
-# def zrotate(i):
-
-#     n = len(sorted_cords)
-#     x1cord = sorted_cords[i][0]
-#     x2cord = sorted_cords[i - n // 4][0] #- n // 4
-#     x3cord = sorted_cords[i - n // 4 * 3][0]
-#     x4cord = sorted_cords[i - n // 4 * 2][0]
-#     xallcords = [x1cord, x2cord, x3cord, x4cord]
-
-
-#     return(xallcords)
-
-
-
-
-def cordcalc(i, wha):
+    zcrdall = [[zcrd1, 0], [zcrd2, 0], [zcrd3, 0], [zcrd4, 0], [zcrd5, 0], [zcrd6, 0], [zcrd7, 0], [zcrd8, 0]]
     
-    zcrd = zrotate(i)
-    ycrd = yrotate(i)
 
+    return zcrdall
+
+
+
+
+def yspin(i):
+
+    ycrd1 = sorted_cords[i][1]
+    ycrd2 = sorted_cords[i][1]
+
+    ycrd3 = sorted_cords[i- n // 4][1]
+    ycrd4 = sorted_cords[i- n // 4][1] 
+
+    ycrd5 = sorted_cords[i- n // 4 * 3][1] 
+    ycrd6 = sorted_cords[i- n // 4 * 3][1] 
+
+    ycrd7 = sorted_cords[i- n // 4 * 2][1] 
+    ycrd8 = sorted_cords[i- n // 4 * 2][1] 
+
+    ycrdall = [[0, ycrd1], [0, ycrd2], [0, ycrd3], [0, ycrd4], [0, ycrd5], [0, ycrd6], [0, ycrd7], [0, ycrd8]]
     
-    sum_cords1 = []
-    sum_cords2 = []
-    sum_cords3 = []
-    sum_cords4 = []
+
+    return ycrdall
 
 
 
 
-
-    sum_cords1.append(zcrd[0])
-    sum_cords1.append(ycrd[0])
-
-    sum_cords2.append(zcrd[1])
-    sum_cords2.append(ycrd[1])
-
-    sum_cords3.append(zcrd[2])
-    sum_cords3.append(ycrd[2])
-
-    sum_cords4.append(zcrd[3])
-    sum_cords4.append(ycrd[3])
-
-    sum_cords_all = [sum_cords1, sum_cords2, sum_cords3, sum_cords4]
-
-    return sum_cords_all
+zi = 0
+yi = 0
 
 
+def spincalc(i, wha):
+
+    global zi
+    global yi
+
+    if zi >= n:
+        zi = 0
+
+    if yi >= n:
+        yi = 0
 
 
+    zcords = zspin(zi)
+    ycords = yspin(yi)
+
+    if wha == "z":
+        
+
+        zi += 1
+        for j in range(len(zcords)):
+
+            zcords[j][1] = ycords[j][1]
 
         
 
+        return zcords
+    
+    
+
+    elif wha == "y":
+        
+            
+        yi += 1
+        for j in range(len(ycords)):
+
+            ycords[j][0] = zcords[j][0]
+        
+        
+
+        return ycords
+
+    
 
 
 
-
-
-
-
-
-
-
-
-
+    
 
 
 
@@ -278,22 +270,45 @@ def cordcalc(i, wha):
 
 
 def render():
-    sys("mode con: cols=100 lines=26")
-    
-    for i in range(len(sorted_cords)):
-        cordsss = cordcalc(i, all)
+    stage = "z"
 
-        for y in range(-13, 13):
-            for x in range(-26, 26):
+    while True:
+        for i in range(n):
+            cord = spincalc(i, stage)
+            for y in range(-13, 13):
+                for x in range(-26, 26):
 
-                if  [x, y] in cordsss:
-                    print("#", end = "")
-                else:
-                    print(" ", end = "")
-            print()
-        what = input("x y z: ")
-        if what == "z":
-            cordcalc(i, "z")
+                    if [x, y] in cord:
+                        print("#", end = "")
+                    else:
+                        print(" ", end = "")
+
+
+                print()
+            what = input("x y z: ")
+
+            if what == "z":
+                cord = spincalc(i, "z")
+                stage = "z"
+
+            elif what == "y":
+                cord = spincalc(i, "y")
+                stage = "y"
+            else:
+                stage = stage
+            
+
+
 
 render()
+
+
+
+
+
+
+
+
+
+
 
