@@ -21,29 +21,29 @@ def circle_sort():
         for x in range(-26, 26):
             cordinate = []
             if 25**2 >= (x**2) + ((y*2)**2) and 25**2 <= (x**2) + 50 + ((y*2)**2) + 50: # +50
-                # print("#", end = "") # отрисовка для дебага
+                print("#", end = "") # отрисовка для дебага
                 cordinate.append(x)
                 cordinate.append(y)
                 cords.append(cordinate)
             else: 
                 pass
-                # print(" ", end = "") # отрисовка для дебага
-        # print("")
-    # input()
+                print(" ", end = "") # отрисовка для дебага
+        print("")
+    input()
     
 
 
 
 
-    # for y in range(-26, 26):
-    #     for x in range(-26, 26):
-    #         cordinate = []
-    #         if 25**2 >= (x**2) + ((y*2)**2)  and 25**2 <= (x**2) + ((y*2)**2)+25:
-    #             print(f"({x}, {y})| ", end = "")
+    for y in range(-26, 26):
+        for x in range(-26, 26):
+            cordinate = []
+            if 25**2 >= (x**2) + ((y*2)**2)  and 25**2 <= (x**2) + ((y*2)**2)+100:
+                print(f"({x}, {y})| ", end = "")
 
-    #         else: print(" ", end = "")
-    #     print("") # отрисовка для дебага
-    # input()
+            else: print(" ", end = "")
+        print("") # отрисовка для дебага
+    input()
 
 
 
@@ -147,8 +147,11 @@ def circle_sort():
 
 
 
-    cords = fst_list + snd_list + trd_list + fth_list
-    return cords
+    first_cords = fst_list + snd_list + trd_list + fth_list
+
+    new_cords = first_cords[18:] + first_cords[:18]
+
+    return new_cords
 
 
     # print("\n\n\nall", )
@@ -170,14 +173,14 @@ def zspin(i):
     zcrd1 = sorted_cords[i][0]
     zcrd2 = sorted_cords[i][0]
 
-    zcrd3 = sorted_cords[i- n // 4][0]
-    zcrd4 = sorted_cords[i- n // 4][0] 
+    zcrd3 = sorted_cords[i][0]
+    zcrd4 = sorted_cords[i][0]
 
-    zcrd5 = sorted_cords[i- n // 4 * 3][0] 
-    zcrd6 = sorted_cords[i- n // 4 * 3][0] 
+    zcrd5 = sorted_cords[i][0]
+    zcrd6 = sorted_cords[i][0]
 
-    zcrd7 = sorted_cords[i- n // 4 * 2][0] 
-    zcrd8 = sorted_cords[i- n // 4 * 2][0] 
+    zcrd7 = sorted_cords[i][0]
+    zcrd8 = sorted_cords[i][0]
 
     zcrdall = [[zcrd1, 0], [zcrd2, 0], [zcrd3, 0], [zcrd4, 0], [zcrd5, 0], [zcrd6, 0], [zcrd7, 0], [zcrd8, 0]]
     
@@ -192,14 +195,17 @@ def yspin(i):
     ycrd1 = sorted_cords[i][1]
     ycrd2 = sorted_cords[i][1]
 
-    ycrd3 = sorted_cords[i- n // 4][1]
-    ycrd4 = sorted_cords[i- n // 4][1] 
+    ycrd3 = sorted_cords[i- n // 4 + 1][1]
+    ycrd4 = sorted_cords[i- n // 4 + 1][1]
 
-    ycrd5 = sorted_cords[i- n // 4 * 3][1] 
-    ycrd6 = sorted_cords[i- n // 4 * 3][1] 
 
-    ycrd7 = sorted_cords[i- n // 4 * 2][1] 
-    ycrd8 = sorted_cords[i- n // 4 * 2][1] 
+    ycrd5 = sorted_cords[i- n // 4 * 2 + 2][1]
+    ycrd6 = sorted_cords[i- n // 4 * 2 + 2][1]
+
+    ycrd7 = sorted_cords[i- n // 4 * 3][1]
+    ycrd8 = sorted_cords[i- n // 4 * 3][1]
+
+    
 
     ycrdall = [[0, ycrd1], [0, ycrd2], [0, ycrd3], [0, ycrd4], [0, ycrd5], [0, ycrd6], [0, ycrd7], [0, ycrd8]]
     
@@ -276,7 +282,7 @@ def render():
         for i in range(n):
             cord = spincalc(i, stage)
             for y in range(-13, 13):
-                for x in range(-26, 26):
+                for x in range(-50, 26):
 
                     if [x, y] in cord:
                         print("#", end = "")
@@ -301,7 +307,6 @@ def render():
 
 
 render()
-
 
 
 
